@@ -1,0 +1,306 @@
+/* ===== 기본 세팅 ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0f1014;
+  color: #ffffff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+/* ===== 상단 네비게이션 ===== */
+.navbar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #c5c7d0;
+  font-size: 14px;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: #2cff7a;
+}
+
+.nav-links a:first-child {
+  color: #2cff7a; /* Professional 강조 */
+}
+
+.lang-btn {
+  margin-left: 16px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: none;
+  background: #12141b;
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+  border: 1px solid #2cff7a;
+}
+
+/* ===== 메인 히어로 영역 ===== */
+.hero {
+  max-width: 1200px;
+  margin: 40px auto 80px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+/* 왼쪽 텍스트 */
+.hero-text {
+  flex: 1 1 55%;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #9ea0aa;
+  margin-bottom: 18px;
+}
+
+.title {
+  font-size: 64px;
+  line-height: 1.1;
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+
+.highlight {
+  color: #2cff7a; /* 이름 형광 초록 */
+}
+
+.desc {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #c5c7d0;
+  margin-bottom: 32px;
+}
+
+/* 버튼 + 소셜 링크 */
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 999px;
+  border: 2px solid #2cff7a;
+  color: #2cff7a;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: 0.25s;
+  width: fit-content;
+}
+
+.btn-primary:hover {
+  background: #2cff7a;
+  color: #0f1014;
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.socials a {
+  font-size: 14px;
+  color: #2cff7a;
+  text-decoration: none;
+}
+
+.socials a:hover {
+  opacity: 0.7;
+}
+
+/* 통계(stat) */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.stat {
+  min-width: 90px;
+}
+
+.stat-number {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.stat-label {
+  display: block;
+  font-size: 13px;
+  color: #a4a6b3;
+  margin-top: 4px;
+}
+
+/* ===== 오른쪽 프로필 이미지 ===== */
+.hero-image {
+  flex: 0 0 340px;
+  display: flex;
+  justify-content: right;
+}
+
+.image-ring {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  padding: 10px;
+  border: 3px solid #2cff7a;
+  box-shadow: 0 0 30px rgba(44, 255, 122, 0.35);
+  overflow: hidden;
+}
+
+.image-ring img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+
+
+/* ===== 반응형 (모바일) ===== */
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+
+  .hero-image {
+    align-self: center;
+  }
+
+  .title {
+    font-size: 46px;
+  }
+
+  .navbar {
+    padding-inline: 20px;
+  }
+
+  .hero,
+  .edu-section {
+    padding-inline: 20px;
+  }
+}
+
+/* 전체 배경이 어두운 페이지일 때 느낌 맞게 */
+body {
+  background-color: #111217;
+  color: #f8f8ff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Education 섹션 */
+.edu-section {
+  max-width: 1100px;
+  margin: 80px auto;
+  padding: 0 24px;
+}
+
+/* 타이틀 영역 */
+.edu-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.edu-header h2 {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.edu-icon {
+  font-size: 32px;
+  color: #30e07b;
+}
+
+/* 카드 컨테이너 */
+.edu-cards {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+/* 개별 카드 */
+.edu-card {
+  flex: 1 1 320px;
+  background-color: #16171f;
+  border-radius: 18px;
+  padding: 24px 28px;
+  border: 1px solid #252633;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* 카드 텍스트들 */
+.edu-title {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-bottom: 12px;
+}
+
+.edu-date {
+  font-size: 14px;
+  color: #9fa1b8;
+  margin-bottom: 18px;
+}
+
+/* 점수 영역 (아이콘 + 숫자) */
+.edu-score {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #30e07b;
+  margin-bottom: 18px;
+}
+
+.edu-score-icon {
+  font-size: 18px;
+}
+
+/* 학교 설명 */
+.edu-desc {
+  font-size: 14px;
+  color: #c5c7da;
+  line-height: 1.5;
+}

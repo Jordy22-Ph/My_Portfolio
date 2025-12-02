@@ -1,0 +1,4 @@
+document.write('외부 스크립트 방법');
+
+var num = 10;
+console.log(num);
