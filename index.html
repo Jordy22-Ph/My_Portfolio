@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" id="html-root">
 
 <head>
   <meta charset="UTF-8">
@@ -11,33 +11,46 @@
 
 <body>
 
+  <!-- 이미지 커서 툴팁 -->
+  <div class="img-tooltip" id="imgTooltip">
+    <img id="tooltipImg" src="" alt="" />
+  </div>
+
+  <!-- 텍스트 커서 툴팁 (프로필용) -->
+  <div class="cursor-tooltip" id="cursorTooltip">ME? 👀</div>
+
   <!-- 상단 네비게이션 -->
   <header class="navbar">
     <div class="logo">Subin.</div>
     <nav class="nav-links">
-      <a href="#education">Education</a>
-      <a href="#experience">Experience</a>
-      <a href="#license">License</a>
-      <a href="#award">Award</a>
-      <a href="#ect">Ect</a>
-      <button class="lang-btn">EN</button>
+      <a href="#">Professional</a>
+      <a href="#">Personal</a>
+      <a href="#contact">Contact</a>
+      <div class="lang-dropdown">
+        <button class="lang-btn" id="langBtn">EN ▾</button>
+        <ul class="lang-menu" id="langMenu">
+          <li data-lang="en">EN</li>
+          <li data-lang="ko">KR</li>
+          <li data-lang="ja">JP</li>
+        </ul>
+      </div>
     </nav>
   </header>
 
   <!-- 메인 히어로 섹션 -->
   <main class="hero">
     <section class="hero-text">
-      <p class="subtitle">Data Analyst & Web Developer</p>
+      <p class="subtitle" data-i18n="hero.subtitle">AI Healthcare Developer</p>
       <h1 class="title">
-        Hello I'm<br>
+        <span data-i18n="hero.greeting">Hello I'm</span><br>
         <span class="highlight">Subin</span>
       </h1>
-      <p class="desc">
-        AI & Web Developer | Interested in Healthcare & Bio |<br>
+      <p class="desc" data-i18n="hero.desc">
+        AI &amp; Web Developer | Interested in Healthcare &amp; Bio |<br>
         Curious, learner, and problem solver.
       </p>
       <div class="hero-actions">
-        <a href="#" class="btn-primary">Download CV</a>
+        <a href="#" class="btn-primary" data-i18n="hero.cv">Download CV</a>
         <div class="socials">
           <a href="https://www.instagram.com/__2.w7/" target="_blank">Instagram</a>
           <a href="https://www.youtube.com/@__-ry8xl" target="_blank">Youtube</a>
@@ -47,139 +60,294 @@
         </div>
       </div>
       <div class="stats">
-        <div class="stat">
-          <span class="stat-number">24</span>
-          <span class="stat-label">Age</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">2</span>
-          <span class="stat-label">Years of experience</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">3</span>
-          <span class="stat-label">Projects</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">3</span>
-          <span class="stat-label">Awards</span>
-        </div>
+        <div class="stat"><span class="stat-number">25</span><span class="stat-label" data-i18n="stats.age">Age</span></div>
+        <div class="stat"><span class="stat-number">0</span><span class="stat-label" data-i18n="stats.exp">Years of experience</span></div>
+        <div class="stat"><span class="stat-number">3</span><span class="stat-label" data-i18n="stats.projects">Projects</span></div>
+        <div class="stat"><span class="stat-number">1</span><span class="stat-label" data-i18n="stats.deployed">Deployed</span></div>
       </div>
     </section>
 
+    <!-- 프로필 이미지 -->
     <section class="hero-image">
-      <div class="image-ring">
-        <img src="./images/profile.png" alt="Profile" />
-      </div>
+      <a href="secret.html" class="image-link" id="profileLink">
+        <div class="image-ring-wrapper">
+          <svg class="ring-svg" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="180" cy="180" r="172" fill="none" stroke="#2cff7a" stroke-width="3" stroke-dasharray="20 10"/>
+          </svg>
+          <div class="image-ring">
+            <img src="./images/profile (2).jpg" alt="Profile" />
+          </div>
+        </div>
+      </a>
     </section>
   </main>
 
-  <!-- 교육 섹션 -->
-  <section class="section" id="education">
+
+  <!-- Education 섹션 -->
+  <section class="portfolio-section" id="education">
     <div class="section-header">
-      <span class="section-icon">🎓</span>
-      <h2>Education</h2>
+      <span class="section-icon">🖤</span>
+      <h2 data-i18n="edu.title">Education</h2>
     </div>
     <div class="edu-cards">
       <div class="edu-card">
-        <h3 class="edu-title">High School Certificate</h3>
-        <p class="edu-date">Mar 2016 – Feb 2019</p>
-        <p class="edu-score"><span class="edu-score-icon">🎓</span>전북사대부고</p>
-        <p class="edu-desc">JB National Attached High School</p>
+        <h3 class="edu-title">High school certificate</h3>
+        <p class="edu-date">Mar 2, 2016 - Feb 3, 2019</p>
+        <p class="edu-score"><span class="edu-score-icon">🎓</span>98.5</p>
+        <p class="edu-desc">JB national -<br>Highschool student</p>
       </div>
       <div class="edu-card">
         <h3 class="edu-title">Bachelor in Biotechnology<br>And Engineering</h3>
-        <p class="edu-date">Mar 2020 – Aug 2024</p>
-        <p class="edu-score"><span class="edu-score-icon">🎓</span>3.5 GPA</p>
-        <p class="edu-desc">전남대학교<br>Chonnam National University</p>
+        <p class="edu-date">Mar 2, 2020 - Aug 26, 2024</p>
+        <p class="edu-score"><span class="edu-score-icon">🎓</span>3.5</p>
+        <p class="edu-desc">National University of<br>Korea</p>
       </div>
     </div>
   </section>
 
-  <!-- 경력 섹션 -->
-  <section class="section" id="experience">
+
+  <!-- Experience 섹션 -->
+  <section class="portfolio-section" id="experience">
     <div class="section-header">
       <span class="section-icon">💼</span>
       <h2>Experience</h2>
     </div>
     <div class="timeline">
+
       <div class="timeline-item">
-        <div class="timeline-date">2023.03 – 2024.02</div>
+        <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <h3>해양원생생물 연구실 학부연구생</h3>
-          <p>Marine Microorganism Lab, Undergraduate Researcher</p>
+          <div class="timeline-top">
+            <h3 class="timeline-title img-hover-trigger"
+                data-img="./images/exp_bootcamp.png">
+              AI Healthcare Bootcamp
+            </h3>
+            <span class="timeline-date">2024.09 - 2025.02</span>
+          </div>
+          <p class="timeline-role">Frontend Developer</p>
+          <p class="timeline-desc">
+            All4Health — AI 기반 만성질환 관리 웹 서비스 개발.<br>
+            React / TypeScript / FastAPI / Python
+          </p>
+          <div class="timeline-tags">
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">FastAPI</span>
+          </div>
         </div>
       </div>
+
       <div class="timeline-item">
-        <div class="timeline-date">2025.06 – 2025.08</div>
+        <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <h3>국립농업과학원 기간제 근로 연구원</h3>
-          <p>National Institute of Agricultural Sciences, Contract Researcher</p>
+          <div class="timeline-top">
+            <h3 class="timeline-title img-hover-trigger"
+                data-img="./images/exp_ivf.png">
+              AI Hackathon — IVF Prediction
+            </h3>
+            <span class="timeline-date">2024.11</span>
+          </div>
+          <p class="timeline-role">ML Engineer</p>
+          <p class="timeline-desc">
+            시험관 아기 임신 성공률 예측 모델 개발.<br>
+            LightGBM / XGBoost / CatBoost / SHAP
+          </p>
+          <div class="timeline-tags">
+            <span class="tag">Python</span>
+            <span class="tag">XGBoost</span>
+            <span class="tag">SHAP</span>
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- 자격증 섹션 -->
-  <section class="section" id="license">
+
+  <!-- License 섹션 -->
+  <section class="portfolio-section" id="license">
     <div class="section-header">
       <span class="section-icon">📜</span>
       <h2>License</h2>
     </div>
     <div class="license-grid">
+
       <div class="license-card">
-        <div class="license-badge">TOEIC</div>
-        <div class="license-info">
-          <h3>TOEIC <span class="license-score">825</span></h3>
-          <p>2025.03</p>
-        </div>
+        <div class="license-badge passed">PASS</div>
+        <h3 class="license-name">TOEIC</h3>
+        <p class="license-full">825</p>
+        <p class="license-date">2025.03 취득</p>
       </div>
+
       <div class="license-card">
-        <div class="license-badge">기사</div>
-        <div class="license-info">
-          <h3>정보처리기사 <span class="license-tag">필기 합격</span></h3>
-          <p>2026.03</p>
-        </div>
+        <div class="license-badge passed">PASS</div>
+        <h3 class="license-name">ADsP</h3>
+        <p class="license-full">데이터 분석 준전문가</p>
+        <p class="license-date">2026.06 취득</p>
       </div>
+
       <div class="license-card">
-        <div class="license-badge">ADsP</div>
-        <div class="license-info">
-          <h3>데이터분석 준전문가 (ADsP)</h3>
-          <p>2026.06</p>
-        </div>
+        <div class="license-badge passed">필기합격</div>
+        <h3 class="license-name">정처기</h3>
+        <p class="license-full">정보처리기사</p>
+        <p class="license-date">2026 실기 목표</p>
       </div>
+
+      <div class="license-card">
+        <div class="license-badge ing">준비중</div>
+        <h3 class="license-name">SQLD</h3>
+        <p class="license-full">SQL 개발자</p>
+        <p class="license-date">2026 하반기 목표</p>
+      </div>
+
+      <div class="license-card">
+        <div class="license-badge ing">준비중</div>
+        <h3 class="license-name">빅분기</h3>
+        <p class="license-full">빅데이터분석기사</p>
+        <p class="license-date">2026 하반기 목표</p>
+      </div>
+
     </div>
   </section>
 
-  <!-- 수상 섹션 -->
-  <section class="section" id="award">
+
+  <!-- Award 섹션 -->
+  <section class="portfolio-section" id="award">
     <div class="section-header">
       <span class="section-icon">🏆</span>
       <h2>Award</h2>
     </div>
     <div class="award-list">
+
       <div class="award-item">
-        <span class="award-date">2023.02</span>
-        <div class="award-content">
-          <h3>지역 고교생-대학생 간 멘토링 프로그램 대상</h3>
-          <p>Regional High School–University Mentoring Program, Grand Prize</p>
+        <div class="award-left">
+          <span class="award-rank gold">🥇 1st</span>
+          <div>
+            <h3 class="award-title img-hover-trigger"
+                data-img="./images/award_hackathon.png">
+              AI 헬스케어 해커톤
+            </h3>
+            <p class="award-desc">예측 AI 모델 — 데이터 누수 탐지 및 앙상블 최적화</p>
+          </div>
         </div>
+        <span class="award-date">2024.11</span>
       </div>
+
       <div class="award-item">
-        <span class="award-date">2024.09</span>
-        <div class="award-content">
-          <h3>UN SDGs 5만기행 해외 탐방 프로그램 최우수상</h3>
-          <p>UN SDGs Overseas Exploration Program, Excellence Award</p>
+        <div class="award-left">
+          <span class="award-rank silver">🥈 2nd</span>
+          <div>
+            <h3 class="award-title img-hover-trigger"
+                data-img="./images/award_project.png">
+              프로젝트
+            </h3>
+            <p class="award-desc">All4Health — AI 만성질환 관리 웹 서비스</p>
+          </div>
         </div>
+        <span class="award-date">2025.02</span>
       </div>
-      <div class="award-item">
-        <span class="award-date">2025.06</span>
-        <div class="award-content">
-          <h3>[스콘×YBM] 토익 서포터즈 최우수상</h3>
-          <p>SCONE x YBM TOEIC Supporters, Excellence Award</p>
+
+    </div>
+  </section>
+
+
+  <!-- Contact 섹션 -->
+  <section class="contact-section" id="contact">
+    <div class="contact-toggle" id="contactToggle">
+      <span class="contact-toggle-text">CONTACT ME</span>
+      <span class="contact-arrow" id="contactArrow">▼</span>
+    </div>
+    <div class="contact-body" id="contactBody">
+      <div class="contact-inner">
+        <p class="contact-intro">언제든지 편하게 연락주세요 :)</p>
+        <div class="contact-grid">
+          <a href="mailto:your@email.com" class="contact-item">
+            <span class="contact-icon">✉️</span>
+            <span class="contact-label">Email</span>
+            <span class="contact-value">tnqlsdl1153@naver.com</span>
+          </a>
+          <a href="https://github.com/Jordy22-Ph" target="_blank" class="contact-item">
+            <span class="contact-icon">🐙</span>
+            <span class="contact-label">Github</span>
+            <span class="contact-value">Jordy22-Ph</span>
+          </a>
+          <a href="https://www.linkedin.com/in/%EC%88%98%EB%B9%88-747aa1397/" target="_blank" class="contact-item">
+            <span class="contact-icon">💼</span>
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value">수빈</span>
+          </a>
+          <a href="https://blog.naver.com/tnqlsdl1153" target="_blank" class="contact-item">
+            <span class="contact-icon">📝</span>
+            <span class="contact-label">Blog</span>
+            <span class="contact-value">Naver Blog</span>
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 기타 교육/수료 섹션 -->
-  <section
+  <footer class="footer">
+    <p>© 2025 Subin. All rights reserved.</p>
+  </footer>
+
+
+  <script>
+    /* ===== 다국어 ===== */
+    const i18n = {
+      en: { "hero.subtitle":"AI Healthcare Developer","hero.greeting":"Hello I'm","hero.desc":"AI & Web Developer | Interested in Healthcare & Bio | Curious, learner, and problem solver.","hero.cv":"Download CV","stats.age":"Age","stats.exp":"Years of experience","stats.projects":"Projects","stats.deployed":"Deployed","edu.title":"Education" },
+      ko: { "hero.subtitle":"AI 헬스케어 개발자","hero.greeting":"안녕하세요, 저는","hero.desc":"AI & 웹 개발자 | 헬스케어 & 바이오에 관심 | 호기심 많고, 끊임없이 배우는 문제해결사.","hero.cv":"이력서 다운로드","stats.age":"나이","stats.exp":"경력 연수","stats.projects":"프로젝트","stats.deployed":"배포 완료","edu.title":"학력" },
+      ja: { "hero.subtitle":"AIヘルスケア開発者","hero.greeting":"こんにちは、私は","hero.desc":"AI & Webデベロッパー | ヘルスケア & バイオに興味 | 好奇心旺盛で、学び続ける問題解決者.","hero.cv":"CVダウンロード","stats.age":"年齢","stats.exp":"経験年数","stats.projects":"プロジェクト","stats.deployed":"デプロイ済み","edu.title":"学歴" }
+    };
+    function applyLang(lang) {
+      const dict = i18n[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.innerHTML = dict[key].replace(/\n/g, '<br>');
+      });
+      document.getElementById('langBtn').textContent = lang.toUpperCase() + ' ▾';
+      document.getElementById('html-root').lang = lang;
+    }
+    const langBtn = document.getElementById('langBtn');
+    const langMenu = document.getElementById('langMenu');
+    langBtn.addEventListener('click', e => { e.stopPropagation(); langMenu.classList.toggle('open'); });
+    langMenu.querySelectorAll('li').forEach(li => li.addEventListener('click', () => { applyLang(li.dataset.lang); langMenu.classList.remove('open'); }));
+    document.addEventListener('click', () => langMenu.classList.remove('open'));
+
+    /* ===== 프로필 커서 툴팁 ===== */
+    const profileLink = document.getElementById('profileLink');
+    const cursorTooltip = document.getElementById('cursorTooltip');
+    profileLink.addEventListener('mousemove', e => {
+      cursorTooltip.style.left = (e.clientX + 18) + 'px';
+      cursorTooltip.style.top = (e.clientY - 10) + 'px';
+      cursorTooltip.classList.add('visible');
+    });
+    profileLink.addEventListener('mouseleave', () => cursorTooltip.classList.remove('visible'));
+
+    /* ===== 이미지 커서 툴팁 (Experience / Award) ===== */
+    const imgTooltip = document.getElementById('imgTooltip');
+    const tooltipImg = document.getElementById('tooltipImg');
+    document.querySelectorAll('.img-hover-trigger').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const src = el.getAttribute('data-img');
+        if (tooltipImg.src !== location.origin + '/' + src) {
+          tooltipImg.src = src;
+        }
+        imgTooltip.style.left = (e.clientX + 20) + 'px';
+        imgTooltip.style.top = (e.clientY - 80) + 'px';
+        imgTooltip.classList.add('visible');
+      });
+      el.addEventListener('mouseleave', () => imgTooltip.classList.remove('visible'));
+    });
+
+    /* ===== Contact 토글 ===== */
+    const contactToggle = document.getElementById('contactToggle');
+    const contactBody = document.getElementById('contactBody');
+    const contactArrow = document.getElementById('contactArrow');
+    contactToggle.addEventListener('click', () => {
+      const isOpen = contactBody.classList.toggle('open');
+      contactArrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+    });
+  </script>
+
+</body>
+</html>
