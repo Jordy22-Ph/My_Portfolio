@@ -505,13 +505,16 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click'
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+console.log('[Firebase] 모듈 로드 완료');
 const firebaseConfig={apiKey:"AIzaSyBcFEt94vDv15NFaKloUXW94vSO7a9-3lo",authDomain:"subin-portfolio-1a5a2.firebaseapp.com",projectId:"subin-portfolio-1a5a2",storageBucket:"subin-portfolio-1a5a2.firebasestorage.app",messagingSenderId:"716285576647",appId:"1:716285576647:web:65c071ca6a35cf1f8045e2"};
 const app=initializeApp(firebaseConfig);
 const db=getFirestore(app);
 const form=document.getElementById('contact-form');
+console.log('[Firebase] 폼 요소:', form);
 if(form){
   form.addEventListener('submit',async e=>{
     e.preventDefault();
+    console.log('[Firebase] 폼 제출 시작');
     const btn=form.querySelector('button[type=submit]');
     const orig=btn.textContent;
     const name=document.getElementById('f-name').value.trim();
@@ -520,12 +523,15 @@ if(form){
     btn.textContent='전송 중...';
     btn.disabled=true;
     try{
+      console.log('[Firebase] Firestore 저장 시도...');
       await addDoc(collection(db,'messages'),{name,email,message,createdAt:serverTimestamp()});
+      console.log('[Firebase] 저장 성공!');
       btn.textContent='✓ 전송 완료!';
       btn.style.cssText='background:#2cff7a;color:#080810';
       form.reset();
       setTimeout(()=>{btn.textContent=orig;btn.style.cssText='';btn.disabled=false;},3000);
     }catch(err){
+      console.error('[Firebase] 저장 실패:', err.code, err.message);
       btn.textContent='오류 — 다시 시도해주세요';
       btn.style.cssText='background:#ff4455;color:#fff';
       btn.disabled=false;
