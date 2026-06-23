@@ -67,7 +67,14 @@
     .role-item__text { font-size: 14px; color: var(--text-2); }
 
     .image-placeholder { width: 100%; aspect-ratio: 16/9; background: var(--surface2); border: 1px dashed var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-3); font-size: 13px; margin-bottom: 8px; }
-    .image-caption { font-size: 12px; color: var(--text-3); text-align: center; margin-bottom: 20px; }
+    .image-caption { font-size: 12px; color: var(--text-3); text-align: center; margin-bottom: 28px; }
+    .screen-img { width: 100%; border-radius: 10px; border: 1px solid var(--border); display: block; margin-bottom: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); cursor: zoom-in; transition: opacity 0.2s; }
+    .screen-img:hover { opacity: 0.88; }
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.92); align-items: center; justify-content: center; padding: 24px; }
+    .lightbox.open { display: flex; }
+    .lightbox__img { max-width: 100%; max-height: 90vh; border-radius: 8px; box-shadow: 0 24px 80px rgba(0,0,0,0.7); object-fit: contain; }
+    .lightbox__close { position: fixed; top: 20px; right: 24px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border: none; border-radius: 50%; color: #fff; font-size: 20px; cursor: pointer; transition: background 0.2s; }
+    .lightbox__close:hover { background: rgba(44,255,122,0.25); }
 
     footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; font-size: 13px; color: var(--text-3); }
   </style>
@@ -157,9 +164,9 @@
             <div class="feature-card__body">고혈압·당뇨·만성신장질환 3가지 모델. XGBoost + LightGBM 앙상블, 만성신장질환 AUC 0.957 달성.</div>
           </div>
           <div class="feature-card">
-            <div class="feature-card__icon">💬</div>
-            <div class="feature-card__title">LLM 건강 조언 챗봇</div>
-            <div class="feature-card__body">OpenAI API 기반. 사용자 건강 수치와 질환 유형을 컨텍스트로 주입하여 개인화된 생활습관 조언 제공.</div>
+            <div class="feature-card__icon">🩺</div>
+            <div class="feature-card__title">AI 맞춤 건강 조언</div>
+            <div class="feature-card__body">OpenAI API 기반. 예측된 위험도·주요 위험 인자·건강 수치를 컨텍스트로 주입해 오늘의 맞춤 생활습관 개선 조언을 자동 생성합니다.</div>
           </div>
           <div class="feature-card">
             <div class="feature-card__icon">🏆</div>
@@ -205,7 +212,7 @@
         </div>
         <div class="card">
           <div class="card__title">AI / ML</div>
-          <div class="card__body">XGBoost + LightGBM 앙상블 (3개 질환 모델) · 고혈압 AUC 0.921 · 당뇨 AUC 0.944 · 만성신장질환 AUC 0.957 · OpenAI GPT-4o-mini LLM 챗봇</div>
+          <div class="card__body">XGBoost + LightGBM 앙상블 (3개 질환 모델) · 고혈압 AUC 0.921 · 당뇨 AUC 0.944 · 만성신장질환 AUC 0.957 · OpenAI GPT-4o-mini 기반 AI 맞춤 건강 조언 생성</div>
         </div>
         <div class="card">
           <div class="card__title">Infra / DevOps</div>
@@ -215,12 +222,14 @@
 
       <section class="section">
         <h2 class="section__title">서비스 화면</h2>
-        <div class="image-placeholder">이미지 준비 중</div>
-        <p class="image-caption">메인 대시보드 — 건강 수치 요약 및 AI 위험도 표시</p>
-        <div class="image-placeholder">이미지 준비 중</div>
-        <p class="image-caption">챌린지 화면 — 일일 목표 달성 및 펫 성장 시스템</p>
-        <div class="image-placeholder">이미지 준비 중</div>
-        <p class="image-caption">LLM 건강 조언 챗봇 — 개인화 컨텍스트 기반 대화</p>
+        <img src="images/all4health-landing.png" alt="All4Health 랜딩 페이지" class="screen-img">
+        <p class="image-caption">서비스 랜딩 페이지 — 주요 기능 소개 및 온보딩 흐름</p>
+        <img src="images/all4health-dashboard.png" alt="홈 대시보드" class="screen-img">
+        <p class="image-caption">홈 대시보드 — 오늘의 건강 점수, AI 맞춤 조언, 진행 중 챌린지 한눈에 확인</p>
+        <img src="images/all4health-prediction.png" alt="AI 예측 결과" class="screen-img">
+        <p class="image-caption">AI 예측 결과 — 5대 만성질환 위험도 분석 및 주요 위험 인자 표시</p>
+        <img src="images/all4health-pet.png" alt="가상 펫" class="screen-img">
+        <p class="image-caption">가상 펫 시스템 — 보상 과제 달성·경험치 적립으로 펫 성장</p>
       </section>
 
     </div>
@@ -230,6 +239,97 @@
 <footer>
   <p>Subin Ju · AI Healthcare Developer · <a href="index.html">Portfolio</a></p>
 </footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox__close" id="lightbox-close">✕</button>
+  <img class="lightbox__img" id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  const lightbox    = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  let scale = 1, tx = 0, ty = 0;
+  let isDragging = false, wasDragging = false;
+  let startMouseX, startMouseY, startTx, startTy;
+
+  function applyTransform() {
+    lightboxImg.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+    lightboxImg.style.cursor = scale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-in';
+  }
+
+  function resetZoom() {
+    scale = 1; tx = 0; ty = 0;
+    applyTransform();
+  }
+
+  function openLightbox(img) {
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    resetZoom();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    resetZoom();
+  }
+
+  document.querySelectorAll('.screen-img').forEach(img => {
+    img.addEventListener('click', () => openLightbox(img));
+  });
+
+  // 마우스 휠 줌 (커서 위치 기준)
+  lightbox.addEventListener('wheel', e => {
+    e.preventDefault();
+    const prevScale = scale;
+    const factor = e.deltaY < 0 ? 1.12 : 1 / 1.12;
+    scale = Math.min(Math.max(scale * factor, 0.5), 6);
+
+    const rect = lightboxImg.getBoundingClientRect();
+    const ox = e.clientX - (rect.left + rect.width  / 2);
+    const oy = e.clientY - (rect.top  + rect.height / 2);
+    tx += ox * (1 - scale / prevScale);
+    ty += oy * (1 - scale / prevScale);
+    applyTransform();
+  }, { passive: false });
+
+  // 드래그로 이동 (줌 상태일 때)
+  lightboxImg.addEventListener('mousedown', e => {
+    if (scale <= 1) return;
+    isDragging = true; wasDragging = false;
+    startMouseX = e.clientX; startMouseY = e.clientY;
+    startTx = tx; startTy = ty;
+    applyTransform();
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    wasDragging = true;
+    tx = startTx + (e.clientX - startMouseX);
+    ty = startTy + (e.clientY - startMouseY);
+    applyTransform();
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+    applyTransform();
+  });
+
+  // 더블클릭으로 줌 리셋
+  lightboxImg.addEventListener('dblclick', resetZoom);
+
+  // 닫기
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox && !wasDragging) closeLightbox();
+    wasDragging = false;
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
 
 </body>
 </html>

@@ -303,6 +303,7 @@ body {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(135deg, var(--accent-d) 0%, transparent 55%);
   opacity: 0; transition: opacity var(--t);
+  pointer-events: none;
 }
 .project-card:hover { transform: translateY(-6px); border-color: var(--accent-m); box-shadow: 0 20px 60px rgba(44,255,122,0.08); }
 .project-card:hover::before { opacity: 1; }

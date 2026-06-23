@@ -67,6 +67,14 @@
     .pipeline-step__body { font-size: 13px; color: var(--text-2); }
 
     footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; font-size: 13px; color: var(--text-3); }
+    .image-caption { font-size: 12px; color: var(--text-3); text-align: center; margin-bottom: 28px; }
+    .screen-img { width: 100%; border-radius: 10px; border: 1px solid var(--border); display: block; margin-bottom: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); cursor: zoom-in; transition: opacity 0.2s; }
+    .screen-img:hover { opacity: 0.88; }
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.92); align-items: center; justify-content: center; padding: 24px; }
+    .lightbox.open { display: flex; }
+    .lightbox__img { max-width: 100%; max-height: 90vh; border-radius: 8px; box-shadow: 0 24px 80px rgba(0,0,0,0.7); object-fit: contain; }
+    .lightbox__close { position: fixed; top: 20px; right: 24px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border: none; border-radius: 50%; color: #fff; font-size: 20px; cursor: pointer; transition: background 0.2s; }
+    .lightbox__close:hover { background: rgba(44,255,122,0.25); }
   </style>
 </head>
 <body>
@@ -188,10 +196,10 @@
 
       <section class="section">
         <h2 class="section__title">결과 시각화</h2>
-        <div class="image-placeholder">이미지 준비 중</div>
-        <p class="image-caption">TabNet 최적화 전/후 기여도 비교 — Optuna 튜닝 과정</p>
-        <div class="image-placeholder">이미지 준비 중</div>
-        <p class="image-caption">SHAP Feature Importance — 임신 성공 예측 주요 변수</p>
+        <img src="images/shap_slide.png" alt="SHAP 방향성 분석 — 피처별 임신 성공 기여 방향" class="screen-img">
+        <p class="image-caption">SHAP 방향성 분석 — 피처별 임신 성공 기여 방향 (임신 성공률을 높이는/낮추는 주요 피처)</p>
+        <img src="images/design_rationale_slide.png" alt="모델 설계 근거 및 한계" class="screen-img">
+        <p class="image-caption">모델 설계 근거 및 한계 — ML+DL 분리 전략 이유, 개선 방향 4가지</p>
       </section>
 
     </div>
@@ -201,6 +209,80 @@
 <footer>
   <p>Subin Ju · AI Healthcare Developer · <a href="index.html">Portfolio</a></p>
 </footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox__close" id="lightbox-close">✕</button>
+  <img class="lightbox__img" id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  const lightbox    = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  let scale = 1, tx = 0, ty = 0;
+  let isDragging = false, wasDragging = false;
+  let startMouseX, startMouseY, startTx, startTy;
+
+  function applyTransform() {
+    lightboxImg.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+    lightboxImg.style.cursor = scale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-in';
+  }
+
+  function resetZoom() { scale = 1; tx = 0; ty = 0; applyTransform(); }
+
+  function openLightbox(img) {
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    resetZoom();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    resetZoom();
+  }
+
+  document.querySelectorAll('.screen-img').forEach(img => {
+    img.addEventListener('click', () => openLightbox(img));
+  });
+
+  lightbox.addEventListener('wheel', e => {
+    e.preventDefault();
+    const prevScale = scale;
+    const factor = e.deltaY < 0 ? 1.12 : 1 / 1.12;
+    scale = Math.min(Math.max(scale * factor, 0.5), 6);
+    const rect = lightboxImg.getBoundingClientRect();
+    const ox = e.clientX - (rect.left + rect.width  / 2);
+    const oy = e.clientY - (rect.top  + rect.height / 2);
+    tx += ox * (1 - scale / prevScale);
+    ty += oy * (1 - scale / prevScale);
+    applyTransform();
+  }, { passive: false });
+
+  lightboxImg.addEventListener('mousedown', e => {
+    if (scale <= 1) return;
+    isDragging = true; wasDragging = false;
+    startMouseX = e.clientX; startMouseY = e.clientY;
+    startTx = tx; startTy = ty;
+    applyTransform(); e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    wasDragging = true;
+    tx = startTx + (e.clientX - startMouseX);
+    ty = startTy + (e.clientY - startMouseY);
+    applyTransform();
+  });
+
+  window.addEventListener('mouseup', () => { isDragging = false; applyTransform(); });
+  lightboxImg.addEventListener('dblclick', resetZoom);
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox && !wasDragging) closeLightbox(); wasDragging = false; });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
 
 </body>
 </html>
