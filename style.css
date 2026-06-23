@@ -205,10 +205,12 @@ body {
 }
 .hero__img:hover { transform: scale(1.04); box-shadow: 0 0 80px rgba(44,255,122,0.2); }
 
-.hero__stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; width: 100%; }
-.stat { text-align: center; }
-.stat__num { display: block; font-size: 30px; font-weight: 800; color: var(--accent); letter-spacing: -1px; line-height: 1; }
-.stat__label { display: block; font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 5px; }
+.hero__stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; width: 100%; }
+.profile-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-top: 2px solid rgba(44,255,122,0.25); border-radius: 8px; padding: 16px 8px 14px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; transition: border-top-color 0.25s, background 0.25s; }
+.profile-card:hover { border-top-color: var(--accent); background: rgba(44,255,122,0.04); }
+.profile-card__value { display: block; font-size: 13px; font-weight: 700; color: var(--text-1); line-height: 1.35; }
+.profile-card__value--num { font-size: 24px; color: var(--accent); letter-spacing: -1px; line-height: 1; }
+.profile-card__label { display: block; font-size: 9px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 1.5px; }
 
 .hero__scroll {
   position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
@@ -358,10 +360,15 @@ body {
 .award-item:hover { transform: translateX(4px); }
 .award-item--gold   { border-left: 3px solid #ffc020; }
 .award-item--silver { border-left: 3px solid #aab0c8; }
+.award-item--teal   { border-left: 3px solid var(--accent); }
 .award-medal { font-size: 30px; line-height: 1; }
 .award-title { font-size: 15px; font-weight: 700; color: var(--text-1); margin-bottom: 4px; }
 .award-desc  { font-size: 13px; color: var(--text-2); margin-bottom: 5px; }
 .award-date  { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 1px; }
+.award-link  { font-size: 11px; color: var(--accent); text-decoration: none; letter-spacing: 0.5px; }
+.award-link:hover { text-decoration: underline; }
+.project-detail-link { display: inline-block; margin-top: 12px; padding: 6px 14px; font-size: 12px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; text-decoration: none; transition: background 0.2s, color 0.2s; }
+.project-detail-link:hover { background: var(--accent); color: #0a0a0f; }
 
 /* ==============================
    CONTACT
